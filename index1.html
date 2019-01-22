@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>VISUAL TRY ON</head>
+    <script src="js/callibration.js"></script>
+    <style>
+        .video-camera
+        {
+            width:500px;
+            height: 500px;;
+          
+        }
+        canvas#viewport { border: 1px solid red; width: 900px; height: 400px;}
+    </style>
+    <body>
+        <div>Testing callibration</div>
+        <canvas id="viewport"></canvas>
+
+        <button onclick="letsTryThis()">TEST ME PLEASE!!!</button>
+    </body>
+
+    <script>
+var canvas = document.getElementById('viewport'),
+context = canvas.getContext('2d');
+
+make_base();
+
+function make_base()
+{
+  base_image = new Image();
+  base_image.src = 'test3.jpg';
+  base_image.onload = function(){
+    context.drawImage(base_image, 0, 0, 200,200);
+  }
+}
+function letsTryThis()
+{
+var corners = findCorners(canvas,1,canvas.width*canvas.height);
+var apertureSize = 1;
+// Draw the intensity plot on canvas2
+drawIntensity(canvas,apertureSize,corners);
+
+// Circle the first 100 corners on canvas1
+var results = corners.slice(0,100); 
+circleResults(canvas,results);
+}
+    </script>
+</html>

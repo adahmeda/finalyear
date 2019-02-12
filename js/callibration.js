@@ -84,28 +84,19 @@ function findCorners(canvas,apertureSize,numPoints){
     return results.sort(byDecreasingD).slice(0,numPoints); 
 }
 
-function findCorners(canvas,apertureSize,numPoints){
-    // Get the raw pixel data from the canvas
-    var context = canvas.getContext('2d');
-    var imageData = context.getImageData(0,0,canvas.width,canvas.height);
-
-    // Compute and return the results
-    var results = computeDistanceData(imageData,apertureSize);  
-    return results.sort(byDecreasingD).slice(0,numPoints);  
-}
 
 function drawIntensity(canvas,apertureSize,results){
     var context = canvas.getContext('2d');
     var imageData = context.getImageData(0,0,canvas.width,canvas.height);
 
     // Draw the intensity values at each pixel
-    var scale = Math.pow(apertureSize*2+1,2);
+    var scale = Math.pow(apertureSize*2+1,3);
     var x,y,pos,val,i,l=results.length;
     for( i=0; i<l; i+=1 ){
         x = results[i].x;
         y = results[i].y;
         pos = 4*(canvas.width*y+x);
-        val = results[i].d / (9);
+        val = results[i].d / (10);
         imageData.data[pos+0] = val;
         imageData.data[pos+1] = val;
         imageData.data[pos+2] = val;
@@ -115,7 +106,7 @@ function drawIntensity(canvas,apertureSize,results){
 
 function circleResults(canvas,results){
     var context = canvas.getContext('2d');
-
+    alert("here");
     var i,x,y,l=results.length;
     context.strokeStyle = "1px solid red";
     for( i=0; i<l; i+=1 ){
@@ -126,6 +117,7 @@ function circleResults(canvas,results){
         // console.info( results[i].d );
     }
 }
+
 
 function splatterCanvas(canvas){
 /// Adds noise to `canvas`.

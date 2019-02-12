@@ -27,7 +27,7 @@ make_base();
 function make_base()
 {
   base_image = new Image();
-  base_image.src = 'test.jpg';
+  base_image.src = 'test5.jpg';
   base_image.onload = function(){
     context.drawImage(base_image, 0, 0, 200,200);
   }
@@ -39,9 +39,7 @@ var apertureSize = 1;
 // Draw the intensity plot on canvas2
 drawIntensity(canvas,apertureSize,corners);
 
-// Circle the first 100 corners on canvas1
-var results = corners.slice(0,100); 
-circleResults(canvas,results);
+
 }
     </script>
 </html>

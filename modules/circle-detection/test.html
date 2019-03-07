@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="convolve.js"></script>
+        <script src="gaussianblur.js"></script>
+        <script src="sobel-edge-detection.js"></script>
+        <script src="circledetection.js"></script>
+    </head>
+
+    <body onclick="test()">
+>
+            <img id="tester" src="test5.jpg"/>
+            <button onclick="test">dkjhskd<</button>
+
+    </body>
+
+    <script>
+     
+function callback(feedback, record)
+{
+    console.log(feedback);
+}
+function test()
+{
+    var imageIn=document.getElementById('tester');
+ 
+   
+    
+    var can=gaussianFilter(imageIn);
+    var canvas=sobel(can);
+    HoughCircleTransform(canvas);
+}
+//var myImageData = context.createImageData(200,200);
+
+
+
+
+
+    </script>
+
+    
+</html>

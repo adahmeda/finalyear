@@ -58,30 +58,7 @@
         </div>
         <button id="start">Start</button>
         <div id="debug"></div>
-
-        <script>
-            /**
-             * Requires:
-             * three.js (r54) http://threejs.org/
-             * clmtrack https://github.com/auduno/clmtrackr
-             *
-             * @author Yevhen Matasar <matasar.ei@gmail.com>
-             * @param obj Params
-             * @returns obj Class instance
-             * @version 20150128
-             */
-
-
-          /*   function createObjectURL (file) {
-    if ( window.webkitURL  !== undefined ) {
-        return window.webkitURL.createObjectURL( file );
-    } else if ( window.URL !== undefined && window.URL.createObjectURL !== undefined ) {
-        return window.URL.createObjectURL( file );
-    } else {
-    alert('Method Unavailable: createObjectURL');
-}
-}*/
-
+<script>
             var TryOnFace = function (params) {
                 var ref = this;
 
@@ -377,5 +354,93 @@
                 });
             });
         </script>
+
+
+
+<img src="glasses/testfront.jpg" id="testimage" width="500" height="500"/>
+
+
+<script>
+
+var imageIn=document.getElementById('testimage');
+ 
+   
+    
+ var can=transparent(imageIn);
+ 
+
+
+ function transparent (imageIn) {
+ 
+    var w = imageIn.width,
+        h = imageIn.height,
+        can = document.createElement('canvas'),
+        cw,
+        ch,
+        ctx,
+        imgIn, imgOut,
+        datIn, datOut;
+ 
+    can.width = cw = w + 10* 2; // add padding
+    can.height = ch = h + 10 * 2; // add padding
+ 
+    ctx = can.getContext('2d');
+    ctx.fillStyle = '#000'; // fill with opaque black
+    ctx.fillRect(0, 0, cw, ch);
+    ctx.drawImage(imageIn, 3, 3);
+ 
+    imgIn = ctx.getImageData(0, 0, cw, ch);
+    datIn = imgIn.data;
+ 
+    imgOut = ctx.createImageData(w, h);
+    datOut = imgOut.data;
+ 
+   
+    newColor = {r:0,g:0,b:0, a:0};
+
+for (var i = 0, n = datIn.length; i <n; i += 4) {
+    console.log(" chad")
+    var r = datIn[i],
+            g = datIn[i+1],
+            b = datIn[i+2];
+            console.log(r)
+
+        // If its white then change it
+        if(r == 255 && g == 255 && b == 255){ 
+            // Change the white to whatever.
+            console.log(" CHANGED")
+            datOut[i] = newColor.r;
+            datOut[i+1] = newColor.g;
+            datOut[i+2] = newColor.b;
+            datOut[i+3] = newColor.a;
+        }
+}
+ 
+    // reuse canvas
+    can.width = w;
+    can.height = h;
+ 
+    ctx.putImageData(imgOut, 0, 0);
+    document.body.appendChild(can);
+    var imageOut = new Image();
+ 
+    imageOut.addEventListener('load', function () {
+    //   console.log(" loaded")
+
+    });
+ 
+    imageOut.addEventListener('error', function (error) {
+        
+        console.log(error);
+    });
+ 
+    imageOut.src = can.toDataURL('image/png');
+
+
+    return can;
+}
+
+</script>
+</body>
     </body>
 </html>

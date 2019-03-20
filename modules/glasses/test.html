@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    </head>
+
+    <body>
+
+        <h1>Original Image</h1>
+        <img src="front.jpg" width="500px"/>
+        <img src="side.jpg" width="500px"/>
+        
+        <h2>Image After Rotation</h2>
+        <img id= "testImage" src="front.jpg" class=" rotate" width="500px"/>
+        <img src="side.jpg" class="rotate2" width="500px"/>
+
+        
+    </body>
+
+    <script>
+        var canvas = document.getElementById("canvas"),
+    ctx = canvas.getContext("2d"),
+    image = document.getElementById("testImage");
+
+canvas.height = canvas.width = 135;
+ctx.drawImage(image,0,0);
+
+var imgd = ctx.getImageData(0, 0, 135, 135),
+    pix = imgd.data,
+    newColor = {r:0,g:0,b:0, a:0};
+
+for (var i = 0, n = pix.length; i <n; i += 4) {
+    var r = pix[i],
+            g = pix[i+1],
+            b = pix[i+2];
+
+        // If its white then change it
+        if(r == 255 && g == 255 && b == 255){ 
+            // Change the white to whatever.
+            pix[i] = newColor.r;
+            pix[i+1] = newColor.g;
+            pix[i+2] = newColor.b;
+            pix[i+3] = newColor.a;
+        }
+}
+ctx.p
+ctx.putImageData(imgd, 0, 0);​
+    </script>
+</html>
